@@ -4,13 +4,14 @@ import styles from './Card.module.css';
 import logo from '../../logo.svg';
 
 
-const Card = () => {
+const Card = props => {
+  const { title = 'No title', author = 'unknown' } = props;
   return (
     <div className={styles["card-container"]}>
       <img src={logo} className={styles["logo-container"]}/>
       <div>
-        <div>ALL SUPER TITLE HERE </div>
-        <div> autor: Matias Serrato </div>
+        <div>{title}</div>
+        <div> autor: {author} </div>
       </div>
     </div>
   )
