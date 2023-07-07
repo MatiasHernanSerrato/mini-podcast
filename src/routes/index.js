@@ -10,6 +10,10 @@ const routes = [
     path: '/',
     element: <Dashboard />,
   },
+  {
+    path: '/podcast/:podcastId',
+    element: <>ContentDetail</>,
+  }
 ];
 
 export const AppRoutes = () => {

@@ -10,7 +10,12 @@ const CardContainer = props => {
       {
         data?.feed?.entry && 
         Object.keys(data.feed.entry).map(key => 
-          <Card key={data.feed.entry[key].title.label} title={data.feed.entry[key].title.label} author={data.feed.entry[key]?.['im:artist'].label} />)
+          <Card
+            key={data.feed.entry[key].title.label}
+            title={data.feed.entry[key].title.label}
+            author={data.feed.entry[key]?.['im:artist'].label}
+            podcastId={data.feed.entry[key]?.id?.attributes?.['im:id']}
+          />)
       }
     </div>
   );
