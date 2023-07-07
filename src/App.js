@@ -1,17 +1,18 @@
+import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
+
 import './App.css';
-import Card from './components/Card';
-import CardContainer from './components/CardContainer';
-import Header from './components/Header';
-import Input from './components/Input';
+import { AppRoutes } from './routes';
+
+const queryClient = new QueryClient();
 
 function App() {
   return (
-    <div className="App">
-      <Header />
-      <Input />
-      <Card />
-      <CardContainer />
-    </div>
+    <QueryClientProvider client={queryClient}>
+      <AppRoutes />
+    </QueryClientProvider>
   );
 }
 

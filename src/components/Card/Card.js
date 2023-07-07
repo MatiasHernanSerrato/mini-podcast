@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 import styles from './Card.module.css';
 import logo from '../../logo.svg';
-
 
 const Card = props => {
   const { title = 'No title', author = 'unknown' } = props;

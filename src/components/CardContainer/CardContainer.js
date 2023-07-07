@@ -1,23 +1,16 @@
-import React, { useEffect, useState } from "react";
-import getUrl from '../../utils/utils';
+import React from 'react';
+import Card from '../Card';
 
-const CardContainer = () => {
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    const getPodcast = async () => {
-      const podcasts = await getUrl();
-      setData(podcasts);
-    };
-    getPodcast();
-  }, []);
+import styles from './CardContainer.module.css';
 
+const CardContainer = props => {
+  const { data } = props;
   return (
-    <div>
-      tenemos data? puede ferpa?
+    <div className={styles['card-container']}>
       {
         data?.feed?.entry && 
         Object.keys(data.feed.entry).map(key => 
-          <div><div>{data.feed.entry[key].title.label}</div><div>{data.feed.entry[key]?.['im:artist'].label}</div></div>)
+          <Card key={data.feed.entry[key].title.label} title={data.feed.entry[key].title.label} author={data.feed.entry[key]?.['im:artist'].label} />)
       }
     </div>
   );

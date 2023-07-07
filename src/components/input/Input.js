@@ -1,9 +1,10 @@
 import React from "react";
 
-const Input = () => {
+const Input = props => {
+  const { value, onChange } = props;
   return (
     <div>
-      <input></input>
+      <input value={value} onChange={onChange}/>
     </div>
   )
 };
