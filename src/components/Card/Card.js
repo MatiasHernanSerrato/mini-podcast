@@ -2,14 +2,13 @@ import React from "react";
 import { useNavigate } from 'react-router-dom';
 
 import styles from './Card.module.css';
-import logo from '../../logo.svg';
 
 const Card = props => {
   const navigate = useNavigate();
-  const { title = 'No title', author = 'unknown', podcastId } = props;
+  const { title = 'No title', author = 'unknown', podcastId, imageUrl } = props;
   return (
     <div className={styles["card-container"]} onClick={() => navigate(`/podcast/${podcastId}`)}>
-      <img src={logo} className={styles["logo-container"]}/>
+      <img src={imageUrl} className={styles["logo-container"]} alt="img"/>
       <div>
         <div>{title}</div>
         <div> autor: {author} </div>

@@ -1,0 +1,5 @@
+.podcast-container {
+  display: flex;
+  width: 100vh;
+  margin: 15px;
+}

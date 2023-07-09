@@ -15,6 +15,7 @@ const CardContainer = props => {
             title={data.feed.entry[key].title.label}
             author={data.feed.entry[key]?.['im:artist'].label}
             podcastId={data.feed.entry[key]?.id?.attributes?.['im:id']}
+            imageUrl={data.feed.entry[key]?.['im:image'][2].label}
           />)
       }
     </div>

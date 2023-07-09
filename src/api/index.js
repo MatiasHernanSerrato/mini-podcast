@@ -9,8 +9,8 @@ export async function getPodcasts({ limit = 100, genre = 1310 }) {
   return await http.get(url);
 }
 
-export async function getPodcastDetails(episodeId = '934552872', limit = '20') {
-  const url = getUrl(`lookup?id=${episodeId}&media=podcast&entity=podcastEpisode&limit=${limit}}`);
+export async function getPodcastDetails({podcastId = '934552872', limit = '20'}) {
+  const url = getUrl(`lookup?id=${podcastId}&media=podcast&entity=podcastEpisode&limit=${limit}`);
   return await http.get(url);
 }
 

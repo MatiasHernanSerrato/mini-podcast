@@ -1,0 +1,12 @@
+.left-panel-container {
+  background-color: white;
+  width: 250px;
+  height: auto;
+  box-shadow: 0px 5px 10px gray;
+}
+
+.img-container {
+  height: 100px;
+  width: 100px;
+  margin-left: 28%;
+}
