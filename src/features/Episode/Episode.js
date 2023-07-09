@@ -1,22 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-
-import styles from './Podcast.module.css';
-import { getPodcasts, getPodcastDetails } from '../../api';
-
-import TableEpisodes from '../../components/TableEpisodes';
 import LeftPanel from '../../components/LeftPanel';
+import { useQuery } from '@tanstack/react-query';
+import { getPodcastDetails, getPodcasts } from '../../api';
+import styles from './Episode.module.css';
 
-const Podcast = () => {
-  const { podcastId } = useParams();
+const Episode = () => {
+  const { podcastId, episodeId } = useParams();
+  console.log('episodeid', episodeId);
   const [desc, setDesc] = useState('');
+  const [trackTitle, setTrackTitle] = useState('');
+  const [shortDesc, setShortDesc] = useState('');
+  const [episodeUrl, setEpisodeUrl] = useState('');
   const { isLoading, isError, data: podcast, error } = useQuery(
     { queryKey: ['podcast', podcastId],
       queryFn: () => getPodcastDetails({podcastId}),
       staleTime: 1400 * (60 * 1000),
     });
-  
+
   const { data } = useQuery({
     queryKey: ['podcasts'],
     queryFn: getPodcasts,
@@ -28,6 +29,14 @@ const Podcast = () => {
     setDesc(result?.summary?.label);
   }, [data]);
 
+  useEffect(() => {
+    const data = podcast?.results?.find(item => item?.trackId == episodeId);
+    console.log('data', data);
+    setTrackTitle(data?.trackName);
+    setShortDesc(data?.description);
+    setEpisodeUrl(data?.episodeUrl);
+  }, [podcast]);
+
   if (isLoading) {
     return <>cargando</>
   }
@@ -37,22 +46,22 @@ const Podcast = () => {
   }
 
   return (
-    <div className={styles['podcast-container']}>
+    <div className={styles['episode-container']}>
       <LeftPanel
         podcastId={podcastId}
-        title={podcast.results[0].trackName}
+        title={podcast.results[0]?.trackName}
         description={desc}
         img={podcast.results[0].artworkUrl600}
         author={podcast.results[0].artistName}
       />
       <div className={styles['main-view-container']}>
-        <div className={styles['episodes-container']} >
-          <p>Episodes: {podcast?.results?.length}</p>
-        </div>
-        <TableEpisodes data={podcast.results}/>
+        <p>{trackTitle}</p>
+        <p><div dangerouslySetInnerHTML={{ __html: shortDesc }} /></p>
+        <audio src={episodeUrl} controls="controls"  preload="none"></audio>
       </div>
+      
     </div>
-  );
+  )
 }
 
-export default Podcast;
+export default Episode;

@@ -13,19 +13,26 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 const Dashboard = lazy(() => import('./features/Dashboard'));
-const Podcast = lazy(() => import('./features/Podcast')); 
+const Podcast = lazy(() => import('./features/Podcast'));
+const Episode = lazy(() => import('./features/Episode'));
 
 const router = createBrowserRouter([
   {
     element: <App />,
-    children: [{
-      path: "/",
-      element: <Dashboard />,
+    children: [
+      {
+        path: "/",
+        element: <Dashboard />,
       },
       {
-      path: "/podcast/:podcastId",
-      element: <Podcast />,
-      }]
+        path: "/podcast/:podcastId",
+        element: <Podcast />,
+      },
+      {
+        path: "/podcast/:podcastId/episode/:episodeId",
+        element: <Episode />
+      }
+    ]
     }
 ]);
 
