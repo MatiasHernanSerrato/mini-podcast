@@ -1,10 +1,14 @@
 .header-container {
   text-align: left;
   padding-left: 30px;
-  border-bottom: 3px solid #d6d6d6;
-  box-shadow: 0px 8px 2px #7752522b;
+  border-bottom: 1px solid #d6d6d6;
+  box-shadow: 0px 4px 2px #9696961f;
 }
 
 .header-container h1 {
   color: #4c7bb4;
+}
+
+a {
+  text-decoration: none;
 }

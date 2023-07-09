@@ -1,7 +1,11 @@
 .badge-container {
-  background-color: #7498d7;
+  background-color: #0071b6;;
   color: white;
   width: 32px;
+  font-size: 11px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
   border-radius: 10px;
   font-weight: bold;
   text-align: center;

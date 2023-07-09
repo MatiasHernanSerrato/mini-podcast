@@ -1,4 +1,5 @@
 import React from 'react';
+
 import styles from './Badge.module.css';
 
 const Badge = ({results = 0}) => {

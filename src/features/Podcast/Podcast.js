@@ -1,32 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-
-import styles from './Podcast.module.css';
-import { getPodcasts, getPodcastDetails } from '../../api';
 
 import TableEpisodes from '../../components/TableEpisodes';
 import LeftPanel from '../../components/LeftPanel';
+import usePodcast from '../../hooks/usePodcast';
+
+import styles from './Podcast.module.css';
 
 const Podcast = () => {
   const { podcastId } = useParams();
-  const [desc, setDesc] = useState('');
-  const { isLoading, isError, data: podcast, error } = useQuery(
-    { queryKey: ['podcast', podcastId],
-      queryFn: () => getPodcastDetails({podcastId}),
-      staleTime: 1400 * (60 * 1000),
-    });
-  
-  const { data } = useQuery({
-    queryKey: ['podcasts'],
-    queryFn: getPodcasts,
-    staleTime: 1400 * (60 * 1000),
-  });
-
-  useEffect(() => {
-    const result = data?.feed?.entry?.find(item => item?.id?.attributes?.['im:id'] == podcastId);
-    setDesc(result?.summary?.label);
-  }, [data]);
+  const { isLoading, isError, podcast, error } = usePodcast(podcastId);
 
   if (isLoading) {
     return <>cargando</>
@@ -40,16 +23,16 @@ const Podcast = () => {
     <div className={styles['podcast-container']}>
       <LeftPanel
         podcastId={podcastId}
-        title={podcast.results[0].trackName}
-        description={desc}
-        img={podcast.results[0].artworkUrl600}
-        author={podcast.results[0].artistName}
+        title={podcast.trackName}
+        description={podcast.description}
+        img={podcast.artworkUrl}
+        author={podcast.artistName}
       />
       <div className={styles['main-view-container']}>
         <div className={styles['episodes-container']} >
-          <p>Episodes: {podcast?.results?.length}</p>
+          <p>Episodes: {podcast?.episodes?.length}</p>
         </div>
-        <TableEpisodes data={podcast.results}/>
+        <TableEpisodes data={podcast.episodes}/>
       </div>
     </div>
   );

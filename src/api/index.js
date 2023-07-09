@@ -1,7 +1,7 @@
 import http from '../utils/http';
 
 const BASE_URL = 'https://itunes.apple.com/';
-
+// allowCors api fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('https://wikipedia.org')}`)
 const getUrl = (url) => `${BASE_URL}${url}`;
 
 export async function getPodcasts({ limit = 100, genre = 1310 }) {

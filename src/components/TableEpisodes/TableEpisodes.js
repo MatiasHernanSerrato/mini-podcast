@@ -1,7 +1,10 @@
 import React from 'react';
 import { Link } from "react-router-dom";
+
 import { formatDate, formatTrackDuration } from '../../utils/util';
+
 import styles from './TableEpisodes.module.css';
+
 const TableEpisodes = ({ data }) => {
   return (
     <div className={styles['table-container']}>
